@@ -6,15 +6,16 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
-public class IntSumReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+public class toStringReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
     private IntWritable result = new IntWritable();
 
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
-        int sum = 0;
-        for (IntWritable val : values) {
-            sum += val.get();
+
+        int total = 0;
+        for(IntWritable value : values){
+            total += value.get();
         }
-        result.set(sum);
+        result.set(total);
         context.write(key, result);
     }
 }
