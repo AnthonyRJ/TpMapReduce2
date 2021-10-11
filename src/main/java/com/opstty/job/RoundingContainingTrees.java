@@ -1,7 +1,7 @@
 package com.opstty.job;
 
 import com.opstty.mapper.RoundingMapper;
-import com.opstty.reducer.toStringReducer;
+import com.opstty.reducer.IntSumReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -23,8 +23,8 @@ public class RoundingContainingTrees {
         Job job = Job.getInstance(conf, "roundingContainingTrees");
         job.setJarByClass(RoundingContainingTrees.class);
         job.setMapperClass(RoundingMapper.class);
-        job.setCombinerClass(toStringReducer.class);
-        job.setReducerClass(toStringReducer.class);
+        job.setCombinerClass(IntSumReducer.class);
+        job.setReducerClass(IntSumReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
