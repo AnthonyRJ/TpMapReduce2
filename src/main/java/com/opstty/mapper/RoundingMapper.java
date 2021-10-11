@@ -20,15 +20,15 @@ public class RoundingMapper extends Mapper<Object, Text, Text, IntWritable> {
         string = value.toString();
         String[] stringSplit = string.split(DELIMITER);
 
-       // try{
+       try{
             if(!stringSplit[1].equals("ARRONDISSEMENT")) {
                 rounding.set(stringSplit[1]);
                 context.write(rounding, number);
             }
-        //}
-        /*catch(IOException e){}
+        }
+        catch(IOException e){}
         catch(InterruptedException e2){}
-        catch(NumberFormatException e3){}*/
+        catch(NumberFormatException e3){}
 
     }
 
