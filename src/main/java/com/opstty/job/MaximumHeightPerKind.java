@@ -1,7 +1,9 @@
 package com.opstty.job;
 
+import com.opstty.mapper.MaxHeightMapper;
 import com.opstty.mapper.TokenizerMapper;
 import com.opstty.reducer.IntSumReducer;
+import com.opstty.reducer.MaxHeightReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;
@@ -22,9 +24,9 @@ public class MaximumHeightPerKind {
         }
         Job job = Job.getInstance(conf, "maxHeight");
         job.setJarByClass(MaximumHeightPerKind.class);
-        /*job.setMapperClass(TokenizerMapper.class);
-        job.setCombinerClass(IntSumReducer.class);
-        job.setReducerClass(IntSumReducer.class);*/
+        job.setMapperClass(MaxHeightMapper.class);
+        job.setCombinerClass(MaxHeightReducer.class);
+        job.setReducerClass(MaxHeightReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(DoubleWritable.class);
         for (int i = 0; i < otherArgs.length - 1; ++i) {

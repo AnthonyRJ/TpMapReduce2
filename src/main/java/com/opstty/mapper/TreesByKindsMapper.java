@@ -17,7 +17,15 @@ public class TreesByKindsMapper extends Mapper<Object, Text, Text, IntWritable>{
 
         string = value.toString();
         String[] stringSplit = string.split(DELIMITER);
-        kind.set(stringSplit[2]);
-        context.write(kind, number);
+
+        try{
+            if(!stringSplit[2].equals("GENRE")) {
+                kind.set(stringSplit[2]);
+                context.write(kind, number);
+            }
+        }
+        catch(IOException e){}
+        catch(InterruptedException e1){}
+
     }
 }

@@ -14,9 +14,17 @@ public class SpeciesMapper extends Mapper<Object, Text, Text, IntWritable> {
     private static final String DELIMITER = ";";
 
     public void map(Object key, Text value, Mapper.Context context) throws IOException, InterruptedException {
+
         string = value.toString();
         String[] stringSplit = string.split(DELIMITER);
-        specie.set(stringSplit[3]);
-        context.write(specie, number);
+        try{
+            if(!stringSplit[3].equals("ESPECE")) {
+                specie.set(stringSplit[3]);
+                context.write(specie, number);
+            }
+        }
+        catch(IOException e){}
+        catch(InterruptedException e1){}
+
     }
 }
