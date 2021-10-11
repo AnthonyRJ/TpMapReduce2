@@ -1,17 +1,17 @@
 package com.opstty.mapper;
 
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
+public class MaxHeightMapper extends Mapper<Object, Text, Text, IntWritable>{
 
-public class RoundingMapper extends Mapper<Object, Text, Text, IntWritable> {
-
-    private Text rounding = new Text();
     private String string;
-    private static final IntWritable number = new IntWritable(1);
+    private Text kind = new Text();
+    private DoubleWritable height = new DoubleWritable();
     private static final String DELIMITER = ";";
 
 
@@ -19,8 +19,9 @@ public class RoundingMapper extends Mapper<Object, Text, Text, IntWritable> {
 
         string = value.toString();
         String[] stringSplit = string.split(DELIMITER);
-        rounding.set(stringSplit[1]);
-        context.write(rounding, number);
-    }
 
+        kind.set(stringSplit[2]);
+        height.set(Double.parseDouble(stringSplit[6]));
+        context.write(kind,height);
+    }
 }
